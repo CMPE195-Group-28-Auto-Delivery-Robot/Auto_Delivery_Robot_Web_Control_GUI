@@ -181,7 +181,7 @@ function imu_subscribtion(){
         imu_ui = document.getElementById("imu_info");
         imu_ui.innerHTML = message.linear_acceleration.x + ", " + message.linear_acceleration.y + ", " + message.linear_acceleration.z;
         // console.log('Received message on ' + gpsfix.name + ': ' + message.latitude + "," + message.longitude + "," + message.altitude);        
-        sleep(1);
+        sleep(100);
     });
 }
 
@@ -200,7 +200,7 @@ window.onload = function () {
     // get handle for video placeholder
     createCAM_with_stick("rgb_cam","joystick","/zed2/zed_node/rgb_raw/image_raw_color");
 
-    createCAM('depth_cam',"/zed2/zed_node/depth/depth_registered");
+    createCAM('depth_cam',"/zed2/zed_node/confidence/confidence_map");
 
     // initMap();
     gps_subscribtion();
