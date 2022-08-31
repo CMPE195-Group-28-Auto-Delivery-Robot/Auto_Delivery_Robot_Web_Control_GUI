@@ -7,7 +7,7 @@ var manager;
 var teleop;
 var ros;
 var joystck_size = 120;
-var robot_IP = "192.168.50.233";
+var robot_IP = "ros.rexsky-blog.com";
 
 function moveAction(linear, angular) {
     if (linear !== undefined && angular !== undefined) {
@@ -37,7 +37,7 @@ function initVelocityPublisher() {
     // Init topic object
     cmdVel = new ROSLIB.Topic({
         ros: ros,
-        name: '/cmd_vel',
+        name: '/deli_robot/cmd_vel',
         messageType: 'geometry_msgs/Twist'
     });
     // Register publisher within ROS system
@@ -52,7 +52,7 @@ function initTeleopKeyboard() {
         // Initialize the teleop.
         teleop = new KEYBOARDTELEOP.Teleop({
             ros: ros,
-            topic: '/cmd_vel'
+            topic: '/deli_robot/cmd_vel'
         });
     }
 
@@ -191,7 +191,7 @@ window.onload = function () {
 
     // // Init handle for rosbridge_websocket
     ros = new ROSLIB.Ros({
-        url: "ws://" + robot_IP + ":9090"
+        url: "ws://" + robot_IP + ":10090"
     });
 
     initVelocityPublisher();
