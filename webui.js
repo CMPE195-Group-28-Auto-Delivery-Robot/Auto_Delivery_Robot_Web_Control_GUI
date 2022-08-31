@@ -7,6 +7,7 @@ var manager;
 var teleop;
 var ros;
 var joystck_size = 120;
+var streamingQuality = 30;
 var robot_IP = "ros.rexsky-blog.com";
 
 function moveAction(linear, angular) {
@@ -111,7 +112,7 @@ function createJoystick( joystic_id ) {
 
 function createCAM_with_stick(cam_id, stick_id, path){
     cam = document.getElementById(cam_id);
-    cam.src = "http://" + robot_IP + ":8081/stream?topic="+path+"&type=mjpeg&quality=80";
+    cam.src = "http://" + robot_IP + ":8081/stream?topic="+path+"&type=mjpeg&quality="+streamingQuality;
     cam.onload = function () {
         // joystick and keyboard controls will be available only when video is correctly loaded
         createJoystick(stick_id);
@@ -120,7 +121,7 @@ function createCAM_with_stick(cam_id, stick_id, path){
 
 function createCAM( cam_id, path ){
     cam = document.getElementById(cam_id);
-    cam.src = "http://" + robot_IP + ":8081/stream?topic="+path+"&type=mjpeg&quality=80";
+    cam.src = "http://" + robot_IP + ":8081/stream?topic="+path+"&type=mjpeg&quality="+streamingQuality;
 }
 
 function initGPSSubscriber(){
