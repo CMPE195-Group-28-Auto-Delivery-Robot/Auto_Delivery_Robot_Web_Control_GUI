@@ -1,16 +1,22 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <title>Auto Delivery Robot Control</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <style>
-        h5 {text-align: center;}
-    </style>
+    <head>
+        <title>Auto Delivery Robot Control</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <style>
+            h5 {text-align: center;}
+            h6 {text-align: center;}
+            #map {
+                height: 500px;
+                width: 700px;
+            }
+        </style>
+        <script src="webui.js"></script>
   </head>
 
   <body>
@@ -64,17 +70,23 @@
         <div class="col-md-4">
             <div class="alert alert-success">
                 <h5 class="alert-heading">GPS INFO: <span id="gps_info"></span></h5>
-                <!-- <h5 class="alert-heading">IMU INFO: <span id="imu_info"></span></h5> -->
+                <h5 class="alert-heading">IMU INFO: <span id="imu_info"></span></h5>
             </div>
+            <h6>Latitude: <input id="lat_text" type="text" /> Longitude: <input id="lng_text" type="text" /></h6> 
+            <h6 class="alert-heading"><input type="button" value="Submit" onclick="setMap()" /></h6>
         </div>
         <div class="col-md-4"></div>
     </div>
 
     <!-- map -->
     <div class="row my-4">
-        <div class="col d-flex justify-content-center">
-            <!-- <img src="" class="p-1 bg-dark" alt="" id="gps_map" /> -->
+        <div class="col-md-3"></div>
+        <div class="col-md-9">
+            <div class="col d-flex justify-content-center"  style="width: 2000px; height: 600px;">
+                <div id="map"><div>
+            </div>
         </div>
+        <div class="col-md-4"></div>
     </div>
 
     <!-- Optional JavaScript -->
@@ -86,6 +98,8 @@
     <script src="https://static.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
     <script src="https://static.robotwebtools.org/keyboardteleopjs/current/keyboardteleop.min.js"></script>
     <script src="//yoannmoinet.github.io/nipplejs/javascripts/nipplejs.js"></script>
-    <script src="webui.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script src="map.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUxt_wsjXXEycoW-DZ9WBQt9O0eWSJ1Lw&callback=initMap&v=weekly"defer></script>
   </body>
 </html>

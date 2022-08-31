@@ -165,23 +165,11 @@ function gps_subscribtion(){
     });
 }
 
-function sleep(time){
-    var timeStamp = new Date().getTime();
-    var endTime = timeStamp + time;
-    while(true){
-        if (new Date().getTime() > endTime){
-            return;
-        } 
-    }
-}
-
 function imu_subscribtion(){
     zedimu.subscribe(function(message) {
         // gpsfix.unsubscribe();
         imu_ui = document.getElementById("imu_info");
-        imu_ui.innerHTML = message.linear_acceleration.x + ", " + message.linear_acceleration.y + ", " + message.linear_acceleration.z;
-        // console.log('Received message on ' + gpsfix.name + ': ' + message.latitude + "," + message.longitude + "," + message.altitude);        
-        sleep(100);
+        imu_ui.innerHTML = message.linear_acceleration.x.toFixed(5) + ", " + message.linear_acceleration.y.toFixed(5) + ", " + message.linear_acceleration.z.toFixed(5);
     });
 }
 
@@ -197,12 +185,11 @@ window.onload = function () {
     initVelocityPublisher();
     initGPSSubscriber();
     initIMUSubscriber();
+
     // get handle for video placeholder
     createCAM_with_stick("rgb_cam","joystick","/zed2/zed_node/rgb_raw/image_raw_color");
-
     createCAM('depth_cam',"/zed2/zed_node/confidence/confidence_map");
 
-    // initMap();
     gps_subscribtion();
     imu_subscribtion();
 }
