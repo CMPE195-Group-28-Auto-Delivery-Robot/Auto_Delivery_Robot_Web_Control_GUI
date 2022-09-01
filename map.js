@@ -1,17 +1,23 @@
-var map;
+const robotIcon = "./asset/robotMarkPic.png";
 
-function setMap() {
-    var lat_val = parseFloat(document.getElementById("lat_text").value);
-    var lng_val = parseFloat(document.getElementById("lng_text").value);
+var map;
+var robotMaker;
+
+function initRobotMaker(lat_val, lng_val) {
     const loc = { lat: lat_val, lng: lng_val};
-    console.log(loc);
     if(!isNaN(lat_val)&&!isNaN(lng_val)){
-        const marker = new google.maps.Marker({
+        robotMaker = new google.maps.Marker({
             position: loc,
+            icon: robotIcon,
             map: map,
         });
-    } else{
-        alert("Please Enter Number!");
+    }
+}
+
+function updateRobotMaker(lat_val, lng_val) {
+    const loc = { lat: lat_val, lng: lng_val};
+    if(!isNaN(lat_val)&&!isNaN(lng_val)){
+        robotMaker.setPosition(loc);
     }
 }
 
@@ -25,7 +31,10 @@ function initMap() {
     map = new google.maps.Map(document.getElementById("map"), {
         center: myLatlng,
         zoom: 15,
+        disableDefaultUI: true,
     });
+
+    initRobotMaker(myLatlng.lat, myLatlng.lng);
 
     // Listen for clicks and add the location of the click to firebase.
     // Create the initial InfoWindow.
@@ -47,7 +56,7 @@ function initMap() {
           position: mapsMouseEvent.latLng,
         });
         infoWindow.setContent(
-          JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
+          "Dest: "+JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
         );
         infoWindow.open(map);
         displayGoal(mapsMouseEvent.latLng.lat(),mapsMouseEvent.latLng.lng());

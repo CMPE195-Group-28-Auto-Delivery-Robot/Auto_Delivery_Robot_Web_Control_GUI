@@ -8,7 +8,7 @@ var teleop;
 var ros;
 var joystck_size = 120;
 var streamingQuality = 30;
-var robot_IP = "ros.rexsky-blog.com";
+var robot_IP = "192.168.50.233";
 
 function moveAction(linear, angular) {
     if (linear !== undefined && angular !== undefined) {
@@ -142,26 +142,12 @@ function initIMUSubscriber(){
     });
 }
 
-function initMap() {
-  // The location of Uluru
-  const uluru = { lat: -25.344, lng: 131.031 };
-  // The map, centered at Uluru
-  const map = new google.maps.Map(document.getElementById("gps_map"), {
-    zoom: 4,
-    center: uluru,
-  });
-  // The marker, positioned at Uluru
-  const marker = new google.maps.Marker({
-    position: uluru,
-    map: map,
-  });
-}
-
 function gps_subscribtion(){
     gpsfix.subscribe(function(message) {
         // gpsfix.unsubscribe();
         gps_ui = document.getElementById("gps_info");
-        gps_ui.innerHTML = message.latitude + ", " + message.longitude + ", " + message.altitude;
+        gps_ui.innerHTML = message.latitude.toFixed(5) + ", " + message.longitude.toFixed(5) + ", " + message.altitude.toFixed(5);
+        updateRobotMaker(message.latitude,message.longitude);
         // console.log('Received message on ' + gpsfix.name + ': ' + message.latitude + "," + message.longitude + "," + message.altitude);        
     });
 }
@@ -194,3 +180,5 @@ window.onload = function () {
     gps_subscribtion();
     imu_subscribtion();
 }
+
+window.initMap = initMap;
