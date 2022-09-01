@@ -146,8 +146,12 @@ function gps_subscribtion(){
     gpsfix.subscribe(function(message) {
         // gpsfix.unsubscribe();
         gps_ui = document.getElementById("gps_info");
-        gps_ui.innerHTML = message.latitude.toFixed(5) + ", " + message.longitude.toFixed(5) + ", " + message.altitude.toFixed(5);
-        updateRobotMaker(message.latitude,message.longitude);
+        if(!isNaN(message.latitude)&&!isNaN(message.longitude)){
+            gps_ui.innerHTML = message.latitude.toFixed(5) + ", " + message.longitude.toFixed(5) + ", " + message.altitude.toFixed(5);
+            updateRobotMaker(message.latitude,message.longitude);
+        }else{
+            gps_ui.innerHTML = "GPS Lost !!!!!";
+        }
         // console.log('Received message on ' + gpsfix.name + ': ' + message.latitude + "," + message.longitude + "," + message.altitude);        
     });
 }
