@@ -52,3 +52,4 @@ CATKIN_IGNORE
 
 # Visual Studio Code
 .vscode
+ConnectionConfig.js
