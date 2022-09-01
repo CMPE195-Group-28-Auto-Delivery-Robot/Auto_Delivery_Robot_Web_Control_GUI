@@ -1,0 +1,1 @@
+var robot_IP = "ros.rexsky-blog.com";

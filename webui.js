@@ -8,7 +8,6 @@ var teleop;
 var ros;
 var joystck_size = 120;
 var streamingQuality = 30;
-var robot_IP = "192.168.50.233";
 
 function moveAction(linear, angular) {
     if (linear !== undefined && angular !== undefined) {
