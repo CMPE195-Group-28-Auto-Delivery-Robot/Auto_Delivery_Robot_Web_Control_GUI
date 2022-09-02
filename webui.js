@@ -145,7 +145,7 @@ function gps_subscribtion(){
     gpsfix.subscribe(function(message) {
         // gpsfix.unsubscribe();
         gps_ui = document.getElementById("gps_info");
-        if(!isNaN(message.latitude)&&!isNaN(message.longitude)){
+        if(!(message.latitude == null)&&!(message.longitude == null)){
             gps_ui.innerHTML = message.latitude.toFixed(5) + ", " + message.longitude.toFixed(5) + ", " + message.altitude.toFixed(5);
             updateRobotMaker(message.latitude,message.longitude);
         }else{
