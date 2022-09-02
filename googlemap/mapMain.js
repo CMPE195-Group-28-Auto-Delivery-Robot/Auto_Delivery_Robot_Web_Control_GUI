@@ -42,9 +42,6 @@ function initMap() {
     // Configure the click listener.
     map.addListener("click", (mapsMouseEvent) => {
         displayGoal(mapsMouseEvent.latLng.lat(),mapsMouseEvent.latLng.lng());
-        
+
     });
 }
-
-
-window.initMap = initMap;
