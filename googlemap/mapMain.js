@@ -18,13 +18,20 @@ function updateRobotMaker(lat_val, lng_val) {
     const loc = { lat: lat_val, lng: lng_val};
     if(!isNaN(lat_val)&&!isNaN(lng_val)){
         robotMaker.setPosition(loc);
-        map.setCenter(loc);
     }
 }
 
-function displayGoal(lat, lng){
+function SetGoalPoint(lat, lng){
     var goal_ui = document.getElementById("goal_info");
-    goal_ui.innerHTML = "GOAL GPS: " + lat.toFixed(5) + ", " + lng.toFixed(5);
+    if(!isNaN(lat)&&!isNaN(lng)){
+        goal_ui.innerHTML = "GOAL GPS: " + lat.toFixed(5) + ", " + lng.toFixed(5);
+    }else{
+        goal_ui.innerHTML = "GOAL GPS: Not Set";
+    }
+}
+
+function CenterOnMarker(){
+    map.setCenter(robotMaker.getPosition());
 }
 
 function initMap() {
@@ -37,10 +44,10 @@ function initMap() {
 
     initRobotMaker(myLatlng.lat, myLatlng.lng);
 
-    displayGoal(NaN, NaN);
+    SetGoalPoint(NaN, NaN);
 
     // Configure the click listener.
     map.addListener("click", (mapsMouseEvent) => {
-        displayGoal(mapsMouseEvent.latLng.lat(),mapsMouseEvent.latLng.lng());
+        SetGoalPoint(mapsMouseEvent.latLng.lat(),mapsMouseEvent.latLng.lng());
     });
 }
