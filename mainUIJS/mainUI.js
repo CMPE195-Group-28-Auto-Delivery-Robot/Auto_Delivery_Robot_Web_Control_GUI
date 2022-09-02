@@ -10,6 +10,6 @@ window.onload = function () {
 
     initVelocityPublisher();
     // get handle for video placeholder
-    createCAM_with_stick("rgb_cam","joystick","/zed2/zed_node/rgb_raw/image_raw_color");
-    createCAM('depth_cam',"/zed2/zed_node/confidence/confidence_map");
+    createCAM_with_stick("rgb_cam","joystick","/" + robot_name + "/zed_node/rgb_raw/image_raw_color");
+    createCAM('depth_cam',"/" + robot_name + "/zed_node/confidence/confidence_map");
 }

@@ -4,7 +4,7 @@ function initIMUSubscriber(){
     // Init topic object
     zedimu = new ROSLIB.Topic({
         ros: ros,
-        name: '/zed2/zed_node/imu/data',
+        name: '/' + robot_name + '/zed_node/imu/data',
         messageType: 'sensor_msgs/Imu'
     });
 }

@@ -24,7 +24,7 @@ function updateRobotMaker(lat_val, lng_val) {
 
 function displayGoal(lat, lng){
     var goal_ui = document.getElementById("goal_info");
-    goal_ui.innerHTML = lat.toFixed(5) + ", " + lng.toFixed(5);
+    goal_ui.innerHTML = "GOAL GPS: " + lat.toFixed(5) + ", " + lng.toFixed(5);
 }
 
 function initMap() {
@@ -42,6 +42,5 @@ function initMap() {
     // Configure the click listener.
     map.addListener("click", (mapsMouseEvent) => {
         displayGoal(mapsMouseEvent.latLng.lat(),mapsMouseEvent.latLng.lng());
-
     });
 }
