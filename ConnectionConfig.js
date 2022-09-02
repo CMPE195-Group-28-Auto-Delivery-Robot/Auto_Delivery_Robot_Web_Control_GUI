@@ -1,1 +1,1 @@
-var robot_IP = "192.168.50.233";
+var robot_IP = "ros.rexsky-blog.com";
