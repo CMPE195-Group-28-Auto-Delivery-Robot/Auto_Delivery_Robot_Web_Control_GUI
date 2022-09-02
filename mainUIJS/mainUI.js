@@ -8,6 +8,8 @@ window.onload = function () {
         url: "ws://" + robot_IP + ":10090"
     });
 
+    AddNavBar();
+
     initVelocityPublisher();
     // get handle for video placeholder
     createCAM_with_stick("rgb_cam","joystick","/" + robot_name + "/zed_node/rgb_raw/image_raw_color");

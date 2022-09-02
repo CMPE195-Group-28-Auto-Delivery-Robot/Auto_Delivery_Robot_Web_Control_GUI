@@ -9,6 +9,8 @@ window.onload = function () {
         url: "ws://" + robot_IP + ":10090"
     });
 
+    AddNavBar();
+
     gps_ui = document.getElementById("gps_info");
     gps_ui.innerHTML = "GPS not initalized";
 
