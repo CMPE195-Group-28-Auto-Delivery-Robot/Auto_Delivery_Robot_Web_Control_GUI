@@ -24,9 +24,9 @@ function updateRobotMaker(lat_val, lng_val) {
 function SetGoalPoint(lat, lng){
     var goal_ui = document.getElementById("goal_info");
     if(!isNaN(lat)&&!isNaN(lng)){
-        goal_ui.innerHTML = "GOAL GPS: " + lat.toFixed(5) + ", " + lng.toFixed(5);
+        goal_ui.innerHTML = lat.toFixed(5) + ", " + lng.toFixed(5);
     }else{
-        goal_ui.innerHTML = "GOAL GPS: Not Set";
+        goal_ui.innerHTML = "Not Set";
     }
 }
 

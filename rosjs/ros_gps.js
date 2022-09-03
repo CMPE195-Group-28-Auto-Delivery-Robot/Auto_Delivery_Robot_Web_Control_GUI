@@ -14,7 +14,7 @@ function gps_subscribtion(){
         // gpsfix.unsubscribe();
         gps_ui = document.getElementById("gps_info");
         if(!(message.latitude == null)&&!(message.longitude == null)){
-            gps_ui.innerHTML = "GPS INFO: " + message.latitude.toFixed(5) + ", " + message.longitude.toFixed(5) + ", " + message.altitude.toFixed(5);
+            gps_ui.innerHTML = message.latitude.toFixed(5) + ", " + message.longitude.toFixed(5) + ", " + message.altitude.toFixed(5);
             updateRobotMaker(message.latitude,message.longitude);
         }else{
             gps_ui.innerHTML = "GPS Signal Lost !!!!!";
