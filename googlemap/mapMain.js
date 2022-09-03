@@ -70,6 +70,35 @@ function SendDestination(){
     CenterOnMarker();
 }
 
+function createButtonOnMap(gmap, text, title, callback_func) {
+    const controlButton = document.createElement("button");
+  
+    // Set CSS for the control.
+    controlButton.style.backgroundColor = "#fff";
+    controlButton.style.border = "2px solid #fff";
+    controlButton.style.borderRadius = "3px";
+    controlButton.style.boxShadow = "0 2px 6px rgba(0,0,0,.3)";
+    controlButton.style.color = "rgb(25,25,25)";
+    controlButton.style.cursor = "pointer";
+    controlButton.style.fontFamily = "Roboto,Arial,sans-serif";
+    controlButton.style.fontSize = "16px";
+    controlButton.style.lineHeight = "38px";
+    controlButton.style.margin = "8px 0 22px";
+    controlButton.style.padding = "0 5px";
+    controlButton.style.textAlign = "center";
+  
+    controlButton.textContent = text;
+    controlButton.title = title; // "Click to recenter the map";
+    controlButton.type = "button";
+  
+    // Setup the click event listeners: simply set the map to Chicago.
+    controlButton.addEventListener("click", () => {
+        callback_func();
+    });
+  
+    return controlButton;
+}
+
 
 function initMap() {
     myLatlng = { lat: 37.337, lng: -121.882 };
@@ -77,7 +106,18 @@ function initMap() {
         center: myLatlng,
         zoom: 15,
         disableDefaultUI: true,
+        mapTypeControl: true,
+        rotateControl: true,
+        fullscreenControl: true,
     });
+    const centerControlDiv = document.createElement('div');
+    // Create the control.
+    const centerControl = createButtonOnMap(map, "Center On Robot", "Center the map on robot", CenterOnMarker);
+    const sendControl = createButtonOnMap(map, "Send Destination", "Send the destination through ROS", SendDestination);
+    // Append the control to the DIV.
+    centerControlDiv.appendChild(centerControl);
+    centerControlDiv.appendChild(sendControl);
+    map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(centerControlDiv);
 
     initRobotMaker(myLatlng.lat, myLatlng.lng);
 
