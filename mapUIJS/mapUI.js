@@ -15,8 +15,8 @@ window.onload = function () {
     gps_ui.innerHTML = "GPS not initalized";
 
     initGPSSubscriber();
-    initIMUSubscriber();
+    // initIMUSubscriber();
 
     gps_subscribtion();
-    imu_subscribtion();
+    // imu_subscribtion();
 }
