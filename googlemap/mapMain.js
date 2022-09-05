@@ -99,7 +99,6 @@ function createButtonOnMap(gmap, text, title, callback_func) {
     return controlButton;
 }
 
-
 function initMap() {
     myLatlng = { lat: 37.337, lng: -121.882 };
     map = new google.maps.Map(document.getElementById("map"), {
@@ -110,14 +109,6 @@ function initMap() {
         rotateControl: true,
         fullscreenControl: true,
     });
-    const centerControlDiv = document.createElement('div');
-    // Create the control.
-    const centerControl = createButtonOnMap(map, "Center On Robot", "Center the map on robot", CenterOnMarker);
-    const sendControl = createButtonOnMap(map, "Send Destination", "Send the destination through ROS", SendDestination);
-    // Append the control to the DIV.
-    centerControlDiv.appendChild(centerControl);
-    centerControlDiv.appendChild(sendControl);
-    map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(centerControlDiv);
 
     initRobotMaker(myLatlng.lat, myLatlng.lng);
 

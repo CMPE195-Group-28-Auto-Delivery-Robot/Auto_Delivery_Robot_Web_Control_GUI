@@ -3,6 +3,19 @@ var ros;
 
 window.initMap = initMap;
 
+function AddButtonOnMap(){
+    // Create the control.
+    const centerControlDiv = document.createElement('div');
+
+    const centerControl = createButtonOnMap(map, "Center On Robot", "Center the map on robot", CenterOnMarker);
+    const sendControl = createButtonOnMap(map, "Send Destination", "Send the destination through ROS", SendDestination);
+
+    // Append the control to the DIV.
+    centerControlDiv.appendChild(centerControl);
+    centerControlDiv.appendChild(sendControl);
+    map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(centerControlDiv);
+}
+
 window.onload = function () {
     // // Init handle for rosbridge_websocket
     ros = new ROSLIB.Ros({
@@ -10,6 +23,7 @@ window.onload = function () {
     });
 
     AddNavBar();
+    AddButtonOnMap();
 
     gps_ui = document.getElementById("gps_info");
     gps_ui.innerHTML = "GPS not initalized";

@@ -21,6 +21,10 @@
         h6 {
             text-align: center;
         }
+
+        #joystick {
+            border: 1px solid #FFFFFF;
+        }
     </style>
 </head>
 
@@ -86,13 +90,7 @@
     </div>
 
     <!-- JOYSTICK -->
-    <div class="row my-4">
-        <div class="col">
-            <div class="d-flex justify-content-center" style="width: 120px; height: 120px">
-                <div id="joystick"></div>
-            </div>
-        </div>
-    </div>
+    <div class="center" id="joystick" style="width:200px;height:200px;margin-bottom:20px;"></div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -107,9 +105,9 @@
         crossorigin="anonymous"></script>
     <script src="https://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
     <script src="https://static.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
-    <script src="https://static.robotwebtools.org/keyboardteleopjs/current/keyboardteleop.min.js"></script>
-    <script src="//yoannmoinet.github.io/nipplejs/javascripts/nipplejs.js"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script src="commonLIB/joyStick.js"></script>
+
 
     <!-- Config -->
     <script src="config/ConnectionConfig.js"></script>
