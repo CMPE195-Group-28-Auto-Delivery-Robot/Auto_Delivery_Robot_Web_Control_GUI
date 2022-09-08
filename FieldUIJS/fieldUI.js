@@ -9,8 +9,6 @@ window.onload = function () {
         url: "ws://" + robot_IP + ":10090"
     });
 
-    AddNavBar();
-
     createJoystick("joyDiv");
 
     gps_ui = document.getElementById("gps_info");
