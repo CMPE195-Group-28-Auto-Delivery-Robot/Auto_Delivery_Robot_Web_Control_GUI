@@ -84,10 +84,13 @@ function gamepadPoll() {
     gamepad_w = (gamepad.axes[6]*-1+1)/2*100;
     var lin = (gamepad_y / 100) * 3 * (gamepad_w / 100);
     var ang = (gamepad_x / 100) * 3 * -1 ;
+    if(gamepad.buttons[0].value == 1){
+        lin = 0;
+    }
     if(velInited){
         moveAction(lin, ang);
+        // console.log(lin,ang);
     }
-    // console.log(gamepad_x,gamepad_y);
 }
   
 function gamepadDis() {
