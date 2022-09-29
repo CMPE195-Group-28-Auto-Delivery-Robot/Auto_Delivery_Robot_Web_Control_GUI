@@ -87,7 +87,7 @@ function gamepadPoll() {
     if(velInited){
         moveAction(lin, ang);
     }
-    console.log(gamepad_x,gamepad_y);
+    // console.log(gamepad_x,gamepad_y);
 }
   
 function gamepadDis() {
@@ -98,7 +98,7 @@ window.addEventListener("gamepadconnected", (event) => {
     console.log("A gamepad connected:");
     console.log(event.gamepad);
     gamepads = navigator.getGamepads();
-    console.log(gamepads);
+    // console.log(gamepads);
     gamepadConnected = 1;
     const pollForNewUser = poll({
         fn: gamepadPoll,
@@ -109,6 +109,6 @@ window.addEventListener("gamepadconnected", (event) => {
 
 window.addEventListener("gamepaddisconnected", (event) => {
     console.log("A gamepad disconnected:");
-    console.log(event.gamepad);
+    // console.log(event.gamepad);
     gamepadConnected = 0;
 });
