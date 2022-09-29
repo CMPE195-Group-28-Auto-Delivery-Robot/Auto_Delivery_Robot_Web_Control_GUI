@@ -33,7 +33,6 @@ function includeHTML() {
 function AddNavBar() {
   document.getElementById("navBar").innerHTML = "<div w3-include-html=\"commonLIB/navbar.html\"></div>";
   includeHTML();
-  AddROSStatusIndicator();
 }
 
 function UpdateROSStatus(Color, StateMsg) {
@@ -55,3 +54,20 @@ function AddROSStatusIndicator() {
     UpdateROSStatus("orange", "Disconnected");
   });
 }
+
+const poll = ({ fn, disable, interval }) => {
+  console.log('Start poll...');
+  let attempts = 0;
+
+  const executePoll = async (resolve, reject) => {
+    const result = await fn();
+
+    if (disable()) {
+      setTimeout(executePoll, interval, resolve, reject);
+    } else {
+      return resolve(result);
+    }
+  };
+
+  return new Promise(executePoll);
+};

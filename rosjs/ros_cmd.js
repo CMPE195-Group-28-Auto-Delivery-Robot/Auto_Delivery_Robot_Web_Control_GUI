@@ -3,6 +3,9 @@ var cmdVel;
 var publishImmidiately = true;
 var manager;
 var teleop;
+var gamepad;
+var gamepadConnected = false;
+var velInited = false;
 
 function moveAction(linear, angular) {
     if (linear !== undefined && angular !== undefined) {
@@ -16,12 +19,10 @@ function moveAction(linear, angular) {
 }
 
 function createJoystick( joystic_id ) {
-
     joystickContainer = new JoyStick(joystic_id, {}, function(stickData) {
         robotSpeedRange = document.getElementById("robot-speed");
         var lin = (stickData.y / 110) * 3 * (robotSpeedRange.value / 100);
         var ang = (stickData.x / 110) * 3 * -1 ;
-        // console.log(stickData.x+", "+ ang );
         if (publishImmidiately) {
             publishImmidiately = false;
             moveAction(lin, ang);
@@ -30,45 +31,6 @@ function createJoystick( joystic_id ) {
             }, 50);
         }
     });
-
-    // var options = {
-    //     zone: joystickContainer,
-    //     position: { left: 50 + '%', top: joystck_size/2 + 'px' },
-    //     mode: 'static',
-    //     size: joystck_size,
-    //     color: '#0066ff',
-    //     restJoystick: true
-    // };
-    // manager = nipplejs.create(options);
-    // // event listener for joystick move
-    // manager.on('move', function (evt, nipple) {
-    //     // nipplejs returns direction is screen coordiantes
-    //     // we need to rotate it, that dragging towards screen top will move robot forward
-    //     var direction = nipple.angle.degree - 90;
-    //     if (direction > 180) {
-    //         direction = -(450 - nipple.angle.degree);
-    //     }
-    //     // convert angles to radians and scale linear and angular speed
-    //     // adjust if youwant robot to drvie faster or slower
-    //     robotSpeedRange = document.getElementById("robot-speed");
-    //     var lin = Math.cos(direction / 57.29) * nipple.distance * 0.05 * (robotSpeedRange.value / 100);
-    //     var ang = Math.sin(direction / 57.29) * nipple.distance * 0.05;
-    //     // nipplejs is triggering events when joystic moves each pixel
-    //     // we need delay between consecutive messege publications to 
-    //     // prevent system from being flooded by messages
-    //     // events triggered earlier than 50ms after last publication will be dropped 
-    //     if (publishImmidiately) {
-    //         publishImmidiately = false;
-    //         moveAction(lin, ang);
-    //         setTimeout(function () {
-    //             publishImmidiately = true;
-    //         }, 50);
-    //     }
-    // });
-    // // event litener for joystick release, always send stop message
-    // manager.on('end', function () {
-    //     moveAction(0, 0);
-    // });
 }
 
 function initVelocityPublisher() {
@@ -93,6 +55,7 @@ function initVelocityPublisher() {
     });
     // Register publisher within ROS system
     cmdVel.advertise();
+    velInited = true;
 }
 
 function initTeleopKeyboard() {
@@ -113,3 +76,39 @@ function initTeleopKeyboard() {
         teleop.scale = robotSpeedRange.value / 100
     }
 }
+
+function gamepadPoll() {
+    gamepad = navigator.getGamepads()[0];
+    gamepad_x = Math.floor(gamepad.axes[0]*100);
+    gamepad_y = Math.floor(gamepad.axes[1]*-1*100);
+    gamepad_w = (gamepad.axes[6]*-1+1)/2*100;
+    var lin = (gamepad_y / 100) * 3 * (gamepad_w / 100);
+    var ang = (gamepad_x / 100) * 3 * -1 ;
+    if(velInited){
+        moveAction(lin, ang);
+    }
+    console.log(gamepad_x,gamepad_y);
+}
+  
+function gamepadDis() {
+    return gamepadConnected;
+}
+
+window.addEventListener("gamepadconnected", (event) => {
+    console.log("A gamepad connected:");
+    console.log(event.gamepad);
+    gamepads = navigator.getGamepads();
+    console.log(gamepads);
+    gamepadConnected = 1;
+    const pollForNewUser = poll({
+        fn: gamepadPoll,
+        disable: gamepadDis,
+        interval: 100,
+    })
+});
+
+window.addEventListener("gamepaddisconnected", (event) => {
+    console.log("A gamepad disconnected:");
+    console.log(event.gamepad);
+    gamepadConnected = 0;
+});
