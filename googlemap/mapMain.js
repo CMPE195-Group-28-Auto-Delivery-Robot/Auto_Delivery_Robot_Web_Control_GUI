@@ -36,7 +36,6 @@ function SetGoalPoint(lat_click, lng_click){
                 position: loc,
                 map: map,
             });
-            initDestinationPublisher();
         }else{
             destMaker.setPosition(loc);
         }

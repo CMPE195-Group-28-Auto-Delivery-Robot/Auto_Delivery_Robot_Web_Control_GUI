@@ -29,6 +29,7 @@ window.onload = function () {
     gps_ui.innerHTML = "GPS not initalized";
 
     initGPSSubscriber();
+    initDestinationPublisher();
     // initIMUSubscriber();
 
     gps_subscribtion();
