@@ -6,7 +6,7 @@ function initGPSSubscriber(){
     // Init topic object
     gpsfix = new ROSLIB.Topic({
         ros: ros,
-        name: '/' + robot_name + '/fix',
+        name: '/' + robot_name + '/MT3339/fix',
         messageType: 'sensor_msgs/NavSatFix'
     });
 }
