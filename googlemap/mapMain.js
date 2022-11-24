@@ -8,6 +8,7 @@ var lat;
 var lng;
 var directionsService;
 var directionsRenderer;
+var directionSteps;
 
 function initRobotMaker(lat_val, lng_val) {
     const loc = { lat: lat_val, lng: lng_val};
@@ -110,6 +111,7 @@ function calcRoute(self_loc, dest_loc) {
     var request = {
         origin: self_loc,
         destination: dest_loc,
+        provideRouteAlternatives: false,
         // Note that JavaScript allows us to access the constant
         // using square brackets and a string value as its
         // "property."
@@ -120,6 +122,7 @@ function calcRoute(self_loc, dest_loc) {
         directionsRenderer.setDirections(response);
       }
     });
+    directionSteps = directionsService.routes;
   }
 
 function initMap() {
