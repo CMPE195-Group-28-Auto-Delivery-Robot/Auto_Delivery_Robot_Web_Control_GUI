@@ -4,6 +4,10 @@ const revDigit = 3;
 var map;
 var robotMaker;
 var destMaker;
+var lat;
+var lng;
+var directionsService;
+var directionsRenderer;
 
 function initRobotMaker(lat_val, lng_val) {
     const loc = { lat: lat_val, lng: lng_val};
@@ -35,9 +39,11 @@ function SetGoalPoint(lat_click, lng_click){
             destMaker = new google.maps.Marker({
                 position: loc,
                 map: map,
+
             });
         }else{
             destMaker.setPosition(loc);
+
         }
     }else{
         goal_ui.innerHTML = "Not Set";
@@ -64,6 +70,7 @@ function SendDestination(){
         alert("Destination Undefined.");
     }else{
         var dst_location = destMaker.getPosition();
+        calcRoute(robotMaker.getPosition(), dst_location);
         pubDestination(dst_location.lat(), dst_location.lng());
     }
     CenterOnMarker();
@@ -98,7 +105,26 @@ function createButtonOnMap(gmap, text, title, callback_func) {
     return controlButton;
 }
 
+function calcRoute(self_loc, dest_loc) {
+    var selectedMode = "WALKING";
+    var request = {
+        origin: self_loc,
+        destination: dest_loc,
+        // Note that JavaScript allows us to access the constant
+        // using square brackets and a string value as its
+        // "property."
+        travelMode: google.maps.TravelMode[selectedMode]
+    };
+    directionsService.route(request, function(response, status) {
+      if (status == 'OK') {
+        directionsRenderer.setDirections(response);
+      }
+    });
+  }
+
 function initMap() {
+    directionsService = new google.maps.DirectionsService();
+    directionsRenderer = new google.maps.DirectionsRenderer();
     myLatlng = { lat: 37.337, lng: -121.882 };
     map = new google.maps.Map(document.getElementById("map"), {
         center: myLatlng,
@@ -108,6 +134,8 @@ function initMap() {
         rotateControl: true,
         fullscreenControl: true,
     });
+
+    directionsRenderer.setMap(map);
 
     initRobotMaker(myLatlng.lat, myLatlng.lng);
 
