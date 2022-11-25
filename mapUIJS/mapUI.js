@@ -30,6 +30,7 @@ window.onload = function () {
 
     initGPSSubscriber();
     initDestinationPublisher();
+    initDestListPublisher();
     // initIMUSubscriber();
 
     gps_subscribtion();

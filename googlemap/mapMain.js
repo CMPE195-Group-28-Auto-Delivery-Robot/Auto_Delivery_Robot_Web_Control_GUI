@@ -9,6 +9,8 @@ var lng;
 var directionsService;
 var directionsRenderer;
 var directionSteps;
+var markerArray = [];
+var stepArray = [];
 
 function initRobotMaker(lat_val, lng_val) {
     const loc = { lat: lat_val, lng: lng_val};
@@ -40,7 +42,6 @@ function SetGoalPoint(lat_click, lng_click){
             destMaker = new google.maps.Marker({
                 position: loc,
                 map: map,
-
             });
         }else{
             destMaker.setPosition(loc);
@@ -72,6 +73,7 @@ function SendDestination(){
     }else{
         var dst_location = destMaker.getPosition();
         calcRoute(robotMaker.getPosition(), dst_location);
+        
         pubDestination(dst_location.lat(), dst_location.lng());
     }
     CenterOnMarker();
@@ -106,7 +108,26 @@ function createButtonOnMap(gmap, text, title, callback_func) {
     return controlButton;
 }
 
-function calcRoute(self_loc, dest_loc) {
+function showSteps(directionResult) {
+    // For each step, place a marker, and add the text to the marker's
+    // info window. Also attach the marker to an array so we
+    // can keep track of it and remove it when calculating new
+    // routes.
+    var myRoute = directionResult.routes[0].legs[0];
+  
+    for (var i = 0; i < myRoute.steps.length; i++) {
+        var marker = new google.maps.Marker({
+          position: myRoute.steps[i].start_point,
+          map: map
+        });
+        stepArray[i] = {lat: myRoute.steps[i].end_point.lat(),
+                        lng: myRoute.steps[i].end_point.lng()};
+        markerArray[i] = marker;
+    }
+    pubDestList();
+  }
+
+function calcRoute(self_loc, dest_loc, CallBack) {
     var selectedMode = "WALKING";
     var request = {
         origin: self_loc,
@@ -120,10 +141,14 @@ function calcRoute(self_loc, dest_loc) {
     directionsService.route(request, function(response, status) {
       if (status == 'OK') {
         directionsRenderer.setDirections(response);
+        showSteps(response)
+
       }
     });
-    directionSteps = directionsService.routes;
+
   }
+
+  
 
 function initMap() {
     directionsService = new google.maps.DirectionsService();
