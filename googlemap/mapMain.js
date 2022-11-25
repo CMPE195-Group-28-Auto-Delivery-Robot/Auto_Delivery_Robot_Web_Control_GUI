@@ -10,6 +10,7 @@ var directionsService;
 var directionsRenderer;
 var directionSteps;
 var markerArray = [];
+var pre_markerArray = [];
 var stepArray = [];
 
 function initRobotMaker(lat_val, lng_val) {
@@ -116,13 +117,13 @@ function showSteps(directionResult) {
     var myRoute = directionResult.routes[0].legs[0];
   
     for (var i = 0; i < myRoute.steps.length; i++) {
-        var marker = new google.maps.Marker({
-          position: myRoute.steps[i].start_point,
-          map: map
-        });
+        // var marker = new google.maps.Marker({
+        //   position: myRoute.steps[i].start_point,
+        //   map: map
+        // });
         stepArray[i] = {lat: myRoute.steps[i].end_point.lat(),
                         lng: myRoute.steps[i].end_point.lng()};
-        markerArray[i] = marker;
+        // markerArray[i] = marker;
     }
     pubDestList();
   }
