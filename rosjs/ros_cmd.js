@@ -22,7 +22,7 @@ function createJoystick( joystic_id ) {
     joystickContainer = new JoyStick(joystic_id, {}, function(stickData) {
         robotSpeedRange = document.getElementById("robot-speed");
         var lin = (stickData.y / 110) * 10 * (robotSpeedRange.value / 100);
-        var ang = (stickData.x / 110) * 3 * -1 ;
+        var ang = (stickData.x / 110) * 10 * -1 ;
         if (publishImmidiately) {
             publishImmidiately = false;
             moveAction(lin, ang);
