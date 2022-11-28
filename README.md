@@ -1,5 +1,7 @@
 # Auto_Delivery_Robot_Web_Control_GUI
 
+This is a Web GUI design to run with [Auto_Deli_Robot](https://github.com/CMPE195-Group-28-Auto-Delivery-Robot/Auto_Deli_Robot). It is possible to modify to control other robot.
+
 ## SetUp Guide
 
 1. Pull the Repository to a Server that you desire
@@ -33,3 +35,10 @@
 * [renderLib](https://github.com/CMPE195-Group-28-Auto-Delivery-Robot/Auto_Delivery_Robot_Web_Control_GUI/tree/master/renderLib) contain the all file needed to render the Website so you can run the Website offline (Google Map will not show in Offline Condition)
 * [googlemap](https://github.com/CMPE195-Group-28-Auto-Delivery-Robot/Auto_Delivery_Robot_Web_Control_GUI/tree/master/googlemap) contain the custom js function relatide to google map API
 * [rosjs](https://github.com/CMPE195-Group-28-Auto-Delivery-Robot/Auto_Delivery_Robot_Web_Control_GUI/tree/master/rosjs) contain the custom js function relatide to rosLib API
+
+## Supported Matiral
+
+* [Google Map API](https://developers.google.com/maps/documentation)
+* [BooStrap 4](https://getbootstrap.com/docs/4.0/components/tooltips/)
+* [JoyStick 2](https://github.com/bobboteck/JoyStick)
+* [rosLibjs](https://github.com/RobotWebTools/roslibjs)
