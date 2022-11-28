@@ -1,0 +1,2 @@
+const robot_IP = "<Your Robot Websocket IP>";
+const robot_name = "Your Rotor Name (For Name Space)";
