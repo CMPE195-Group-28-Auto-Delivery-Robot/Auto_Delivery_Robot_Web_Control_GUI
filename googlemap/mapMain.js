@@ -11,6 +11,7 @@ var directionsRenderer;
 var directionSteps;
 var markerArray = [];
 var stepArray = [];
+var pathMarkerCache = [];
 
 function initRobotMaker(lat_val, lng_val) {
     const loc = { lat: lat_val, lng: lng_val};
@@ -50,6 +51,11 @@ function SetGoalPoint(lat_click, lng_click){
     }else{
         goal_ui.innerHTML = "Not Set";
     }
+    if(pathMarkerCache.length!=0){
+        for (i = 0; i < pathMarkerCache.length; i++){
+            pathMarkerCache[i].setMap(null);
+        }
+    }
 }
 
 function CenterOnMarker(){
@@ -73,7 +79,6 @@ function SendDestination(){
     }else{
         var dst_location = destMaker.getPosition();
         calcRoute(robotMaker.getPosition(), dst_location);
-        
         pubDestination(dst_location.lat(), dst_location.lng());
     }
     CenterOnMarker();
@@ -120,10 +125,12 @@ function showSteps(directionResult) {
           position: myRoute.steps[i].start_point,
           map: map
         });
+
         stepArray[i] = {lat: myRoute.steps[i].end_point.lat(),
                         lng: myRoute.steps[i].end_point.lng()};
         markerArray[i] = marker;
     }
+    pathMarkerCache = markerArray;
     pubDestList();
   }
 
