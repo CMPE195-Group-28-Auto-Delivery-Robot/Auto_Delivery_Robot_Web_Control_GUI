@@ -1,0 +1,10 @@
+{
+    "recommendations": [
+        "ritwickdey.liveserver",
+        "yzhang.markdown-all-in-one",
+        "davidanson.vscode-markdownlint",
+        "mhutchie.git-graph",
+        "mikeburgh.xml-format",
+        "thekalinga.bootstrap4-vscode"
+    ]
+}
